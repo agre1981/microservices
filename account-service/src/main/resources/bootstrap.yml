@@ -1,6 +1,6 @@
-spring:  
+spring:
   application:
-    name: customer-service
+    name: account-service
   cloud:
     config:
       discovery:
@@ -12,3 +12,4 @@ spring:
   instance:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
+

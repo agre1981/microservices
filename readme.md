@@ -6,6 +6,12 @@ mvn spring-boot:run -f eureka-service/pom.xml
 ````
 Open in browser: http://localhost:8761 
 
+## 1. Run Config service
+````
+mvn spring-boot:run -f config-server/pom.xml 
+````
+Open in browser: http://localhost:8888/account-service.yml 
+
 ## 2. Run Account service
 ````
 mvn spring-boot:run -f account-service/pom.xml 
