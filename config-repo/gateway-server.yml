@@ -1,3 +1,6 @@
+server:
+  port: 8765
+
 info:
   component: Edge Server
   
@@ -29,9 +32,6 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
     registerWithEureka: false
       
-server:
-  port: 8765
-
 logging:
   level:
     ROOT: INFO
