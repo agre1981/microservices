@@ -1,0 +1,61 @@
+version: '3.3'
+
+services:
+  # Eureka service
+  eureka:
+    build: ./eureka-service
+    ports:
+      - "8761:8761"
+    environment:
+      DISCOVERY_HOST: eureka
+
+  # Config server
+  config:
+    build: ./config-server
+    ports:
+      - "8888:8888"
+    links:
+      - eureka
+    environment:
+      DISCOVERY_URL: http://eureka:8761/eureka/
+
+  # Zipkin service
+  zipkin:
+    build:
+      context: ./zipkin-service
+    ports:
+      - "9411:9411"
+    links:
+      - config
+    environment:
+      DISCOVERY_URL: http://eureka:8761/eureka/
+
+  # Account service
+  account:
+    build: ./account-service
+    ports:
+      - "2222:2222"
+    links:
+      - config
+    environment:
+      DISCOVERY_URL: http://eureka:8761/eureka/
+
+  # Customer service
+  customer:
+    build: ./customer-service
+    ports:
+      - "3333:3333"
+    links:
+      - config
+    environment:
+      DISCOVERY_URL: http://eureka:8761/eureka/
+
+  # Gateway service
+  gateway:
+    build: ./gateway-service
+    ports:
+      - "8765:8765"
+    links:
+      - config
+    environment:
+      DISCOVERY_URL: http://eureka:8761/eureka/
