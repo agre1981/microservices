@@ -1,5 +1,5 @@
 server:
-  port: 8888
+  port: ${CONFIG_PORT:8888}
 
 spring:
   application:
@@ -18,10 +18,10 @@ management:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${DISCOVERY_URL:http://localhost:8761}/eureka/
   instance:
-    leaseRenewalIntervalInSeconds: 10
-    leaseExpirationDurationInSeconds: 20
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
 
 ribbon:
   eureka:

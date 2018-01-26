@@ -1,5 +1,5 @@
 server:
-  port: 2222
+  port: ${ACCOUNT_PORT:2222}
 
 spring:
   logging:

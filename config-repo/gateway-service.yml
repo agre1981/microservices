@@ -1,5 +1,5 @@
 server:
-  port: 8765
+  port: ${GATEWAY_PORT:8765}
 
 info:
   component: Edge Server
@@ -26,12 +26,6 @@ ribbon:
   eureka:
     enabled: true
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-    registerWithEureka: false
-      
 logging:
   level:
     ROOT: INFO
