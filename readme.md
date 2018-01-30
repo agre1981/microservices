@@ -46,7 +46,7 @@ Start containers:
 docker-compose up -d
 docker-compose up -d --build eureka config 
 docker-compose up -d --build account customer zipkin
-docker-compose up --build gateway
+docker-compose up -d --build gateway
 ````
 
 Health check:

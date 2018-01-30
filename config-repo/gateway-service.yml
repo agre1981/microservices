@@ -10,6 +10,10 @@ spring:
     level:
       org.springframework: WARN
 
+management:
+  security:
+    enabled: false
+
 info:
   component: Edge Server
   
