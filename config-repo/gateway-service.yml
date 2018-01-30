@@ -26,6 +26,7 @@ endpoints:
     sensitive: true
 
 zuul:
+  ignoredServices: '*'
   prefix: /api
   routes:
     account: 
