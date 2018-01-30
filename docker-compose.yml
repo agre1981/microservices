@@ -3,59 +3,87 @@ version: '3.3'
 services:
   # Eureka service
   eureka:
+    env_file:
+      - .env
     build: ./eureka-service
     ports:
       - "8761:8761"
-    environment:
-      DISCOVERY_HOST: eureka
 
   # Config server
   config:
+    env_file:
+      - .env
     build: ./config-server
     ports:
       - "8888:8888"
+    depends_on:
+      - eureka
     links:
       - eureka
-    environment:
-      DISCOVERY_URL: http://eureka:8761/eureka/
 
-  # Zipkin service
+  # Account service
+  account:
+    env_file:
+      - .env
+    build: ./account-service
+    ports:
+      - "2222:2222"
+      # for debug
+      - "5005:5005"
+    #command: ["./wait-for-it.sh", "${CONFIG_URL}/health", "--", "echo config-server is up"]
+    depends_on:
+      - eureka
+      - config
+    links:
+      - eureka
+      - config
+
+  # Customer service
+  customer:
+    env_file:
+      - .env
+    build: ./customer-service
+    ports:
+      - "3333:3333"
+     # for debug
+      - "5006:5005"
+    depends_on:
+      - eureka
+      - config
+    links:
+      - eureka
+      - config
+
+  # Gateway service
+  gateway:
+    env_file:
+      - .env
+    build: ./gateway-service
+    ports:
+      - "8765:8765"
+    depends_on:
+      - eureka
+      - config
+      - account
+      - customer
+    links:
+      - eureka
+      - config
+      - account
+      - customer
+
+   #Zipkin service
   zipkin:
+    env_file:
+      - .env
     build:
       context: ./zipkin-service
     ports:
       - "9411:9411"
-    links:
+    depends_on:
+      - eureka
       - config
-    environment:
-      DISCOVERY_URL: http://eureka:8761/eureka/
+    links:
+      - eureka
+      - config
 
-  # Account service
-  account:
-    build: ./account-service
-    ports:
-      - "2222:2222"
-    links:
-      - config
-    environment:
-      DISCOVERY_URL: http://eureka:8761/eureka/
-
-  # Customer service
-  customer:
-    build: ./customer-service
-    ports:
-      - "3333:3333"
-    links:
-      - config
-    environment:
-      DISCOVERY_URL: http://eureka:8761/eureka/
-
-  # Gateway service
-  gateway:
-    build: ./gateway-service
-    ports:
-      - "8765:8765"
-    links:
-      - config
-    environment:
-      DISCOVERY_URL: http://eureka:8761/eureka/

@@ -22,9 +22,9 @@ zuul:
       path: /customer/**
       serviceId: customer-service          
 
-ribbon:
-  eureka:
-    enabled: true
+#ribbon:
+#  eureka:
+#    enabled: true
 
 logging:
   level:

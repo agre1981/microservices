@@ -6,6 +6,9 @@ spring:
       discovery:
         enabled: true
         service-id: config-server
+      fail-fast: true
+
+eureka:
   client:
     serviceUrl:
       defaultZone: ${DISCOVERY_URL:http://localhost:8761}/eureka/
