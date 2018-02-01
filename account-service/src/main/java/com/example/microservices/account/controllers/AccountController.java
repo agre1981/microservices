@@ -6,11 +6,16 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.example.microservices.account.model.Account;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Api(value = "AccountController", description = "Account Controller rest service")
 public class AccountController {
 
 	private List<Account> accounts;
@@ -29,18 +34,27 @@ public class AccountController {
 	}
 	
 	@GetMapping(value = "/accounts/{number}")
+	@ApiOperation(value = "Find account by number", notes = "Find account by number", response = Account.class)
+	@ApiResponses( {
+			@ApiResponse( code = 404, message = "Account with such number doesn't exist" )
+	} )
 	public Account findByNumber(@PathVariable("number") String number) {
 		logger.info(String.format("Account.findByNumber(%s)", number));
 		return accounts.stream().filter(it -> it.getNumber().equals(number)).findFirst().get();
 	}
-	
+
 	@GetMapping(value = "/accounts/customer/{customer}")
+	@ApiOperation(value = "Find account by customer", notes = "Find account by customer", response = Account.class)
+	@ApiResponses( {
+			@ApiResponse( code = 404, message = "Account with such customer doesn't exist" )
+	} )
 	public List<Account> findByCustomer(@PathVariable("customer") Integer customerId) {
 		logger.info(String.format("Account.findByCustomer(%s)", customerId));
 		return accounts.stream().filter(it -> it.getCustomerId().equals(customerId)).collect(Collectors.toList());
 	}
-	
+
 	@GetMapping(value = "/accounts")
+	@ApiOperation(value = "List all accounts", notes = "List all accounts using paging", response = Account.class, responseContainer = "List")
 	public List<Account> findAll() {
 		logger.info("Account.findAll()");
 		return accounts;
