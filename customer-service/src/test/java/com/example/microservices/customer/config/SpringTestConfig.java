@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import static org.mockito.Mockito.mock;
 
 @Configuration
-public class SpringConfig {
+public class SpringTestConfig {
 
     @Bean
     public AccountClient accountClient() {
