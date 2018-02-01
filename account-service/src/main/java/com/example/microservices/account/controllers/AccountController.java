@@ -6,8 +6,8 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.example.microservices.account.model.Account;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -28,19 +28,19 @@ public class AccountController {
 		accounts.add(new Account(7, 2, "777777"));
 	}
 	
-	@RequestMapping("/accounts/{number}")
+	@GetMapping(value = "/accounts/{number}")
 	public Account findByNumber(@PathVariable("number") String number) {
 		logger.info(String.format("Account.findByNumber(%s)", number));
 		return accounts.stream().filter(it -> it.getNumber().equals(number)).findFirst().get();
 	}
 	
-	@RequestMapping("/accounts/customer/{customer}")
+	@GetMapping(value = "/accounts/customer/{customer}")
 	public List<Account> findByCustomer(@PathVariable("customer") Integer customerId) {
 		logger.info(String.format("Account.findByCustomer(%s)", customerId));
-		return accounts.stream().filter(it -> it.getCustomerId().intValue()==customerId.intValue()).collect(Collectors.toList());
+		return accounts.stream().filter(it -> it.getCustomerId().equals(customerId)).collect(Collectors.toList());
 	}
 	
-	@RequestMapping("/accounts")
+	@GetMapping(value = "/accounts")
 	public List<Account> findAll() {
 		logger.info("Account.findAll()");
 		return accounts;

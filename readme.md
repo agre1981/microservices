@@ -58,3 +58,16 @@ Run command inside docker:
 ````
 docker exec -i -t microservices_config_1 curl http://config:8888/health
 ````
+
+## 7. Swagger
+Open swagger account json/html:
+````
+http://localhost:2222/v2/api-docs
+http://localhost:2222/swagger-ui.html
+````
+
+Open swagger customer json/html:
+````
+http://localhost:3333/v2/api-docs
+http://localhost:3333/swagger-ui.html
+````

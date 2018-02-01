@@ -10,3 +10,9 @@ spring:
     level:
       org.springframework: WARN
       org.hibernate: WARN
+
+application:
+  contact:
+    name: Oleksandr Grechanov
+    url: https://github.com/agre1981/microservices
+    email: agre1981@gmail.com
