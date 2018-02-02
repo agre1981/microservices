@@ -4,6 +4,8 @@ import com.example.microservices.account.model.Account;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.test.json.JacksonTester;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,11 +18,12 @@ public class AccountControllerTest extends BaseControllerIT {
     @Test
     public void testFindByNumber() throws IOException {
         // test
-        String body = this.restTemplate.getForObject("/accounts/111111", String.class);
+        ResponseEntity<String> response = this.restTemplate.getForEntity("/accounts/111111", String.class);
 
         // validate
-        Account account = accountEntityJacksonTester.parse(body).getObject();
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 
+        Account account = accountEntityJacksonTester.parse(response.getBody()).getObject();
         Assert.assertEquals(1, account.getId().intValue());
         Assert.assertEquals("111111", account.getNumber());
         Assert.assertEquals(1, account.getCustomerId().intValue());
@@ -29,10 +32,11 @@ public class AccountControllerTest extends BaseControllerIT {
     @Test
     public void testFindAll() throws IOException {
         // test
-        String body = this.restTemplate.getForObject("/accounts", String.class);
+        ResponseEntity<String> response = this.restTemplate.getForEntity("/accounts", String.class);
 
         // validate
-        List<Account> accounts = listAccountEntityJacksonTester.parse(body).getObject();
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+        List<Account> accounts = listAccountEntityJacksonTester.parse(response.getBody()).getObject();
 
         Assert.assertEquals(7, accounts.size());
     }

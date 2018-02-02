@@ -11,6 +11,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.json.JacksonTester;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,16 +33,17 @@ public class CustomerControllerTest extends BaseControllerIT {
 
     @Test
     public void testFindByNumber() throws IOException {
-
         // init
         ArrayList<Account> accounts = Lists.newArrayList( new Account(1, "11111") );
         Mockito.when(accountClient.getAccounts(1)).thenReturn(accounts);
 
         // test
-        String body = this.restTemplate.getForObject("/customers/1", String.class);
+        ResponseEntity<String> response = this.restTemplate.getForEntity("/customers/1", String.class);
 
         // validate
-        Customer customer = accountEntityJacksonTester.parse(body).getObject();
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        Customer customer = accountEntityJacksonTester.parse(response.getBody()).getObject();
 
         Assert.assertEquals(1, customer.getId().intValue());
         Assert.assertEquals("1111", customer.getSsn());
@@ -54,11 +57,12 @@ public class CustomerControllerTest extends BaseControllerIT {
     @Test
     public void testFindAll() throws IOException {
         // test
-        String body = this.restTemplate.getForObject("/customers", String.class);
+        ResponseEntity<String> response = this.restTemplate.getForEntity("/customers", String.class);
 
         // validate
-        List<Customer> customers = listAccountEntityJacksonTester.parse(body).getObject();
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 
+        List<Customer> customers = listAccountEntityJacksonTester.parse(response.getBody()).getObject();
         Assert.assertEquals(4, customers.size());
     }
 }
