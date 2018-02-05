@@ -2,8 +2,14 @@ package com.example.microservices.account.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @ApiModel(value = "Account", description = "Account model")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Account {
 
 	@ApiModelProperty(value = "Account id", required = true, readOnly = true, example = "111")
@@ -14,39 +20,5 @@ public class Account {
 
 	@ApiModelProperty(value = "Account number", required = true, example = "111111111111111")
 	private String number;
-
-	public Account() {
-
-	}
-
-	public Account(Integer id, Integer customerId, String number) {
-		this.id = id;
-		this.customerId = customerId;
-		this.number = number;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Integer getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
 
 }
