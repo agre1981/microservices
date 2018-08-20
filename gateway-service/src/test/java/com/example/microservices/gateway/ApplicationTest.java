@@ -1,4 +1,4 @@
-package com.example.microservices.configserver;
+package com.example.microservices.gateway;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
