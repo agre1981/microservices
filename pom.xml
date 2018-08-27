@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>org.springframework.cloud</groupId>
 		<artifactId>spring-cloud-starter-parent</artifactId>
-		<version>Edgware.RELEASE</version>
+		<version>Edgware.SR4</version>
 	</parent>
 
 	<properties>
