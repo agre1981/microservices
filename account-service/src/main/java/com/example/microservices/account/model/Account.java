@@ -12,13 +12,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Account {
 
-	@ApiModelProperty(value = "Account id", required = true, readOnly = true, example = "111")
-	private Integer id;
+    @ApiModelProperty(value = "Account id", required = true, readOnly = true, example = "111")
+    private Integer id;
 
-	@ApiModelProperty(value = "Account customer id", required = true, example = "222")
-	private Integer customerId;
+    @ApiModelProperty(value = "Account customer id", required = true, example = "222")
+    private Integer customerId;
 
-	@ApiModelProperty(value = "Account number", required = true, example = "111111111111111")
-	private String number;
+    @ApiModelProperty(value = "Account number", required = true, example = "111111111111111")
+    private String number;
 
 }

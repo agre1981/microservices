@@ -40,4 +40,32 @@ public class AccountControllerTest extends BaseControllerIT {
 
         Assert.assertEquals(7, accounts.size());
     }
+
+    @Test
+    public void testCreateAccount() throws IOException {
+
+        Account account = new Account(-1,-1, "123");
+        // test
+        ResponseEntity<String> response = this.restTemplate.postForEntity("/accounts", account, String.class);
+
+        // validate
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Account accountResponse = accountEntityJacksonTester.parse(response.getBody()).getObject();
+
+        Assert.assertEquals(-1, accountResponse.getCustomerId().intValue());
+    }
+
+    @Test
+    public void testCreateAccountValidationIdNull() {
+
+        Account account = new Account(null,111, "123");
+        // test
+        ResponseEntity<String> response = this.restTemplate.postForEntity("/accounts", account, String.class);
+
+        // validate
+        Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        String responseBody = response.getBody();
+
+        Assert.assertEquals("", responseBody);
+    }
 }

@@ -62,15 +62,11 @@ services:
       - customer
       - zipkin
 
-   #Zipkin service
+  #Zipkin service
   zipkin:
-    env_file:
-      - .env
-    build:
-      context: ./zipkin-service
+    image: openzipkin/zipkin
+    container_name: zipkin
     ports:
-      - "9411:9411"
-    depends_on:
-      - eureka
-      - config
+      # Port used for the Zipkin UI and HTTP Api
+      - 9411:9411
 
