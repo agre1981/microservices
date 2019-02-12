@@ -1,2 +1,0 @@
-server:  
-  port: ${ZIPKIN_PORT:9411}
