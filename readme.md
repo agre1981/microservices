@@ -34,30 +34,32 @@ http://localhost:8765/api/account/accounts
 
 http://localhost:8765/api/customer/customers
 
-## 6. Run Zipkin service
-````
-mvn spring-boot:run -f zipkin-service/pom.xml 
-````
-Open in browser: http://localhost:9411
-
-## 7. Docker
+## 6. Docker
 Start containers:
 ````
 docker-compose up -d
+docker-compose up -d --build elasticsearch kibana zipkin 
 docker-compose up -d --build eureka config 
-docker-compose up -d --build account customer zipkin
+docker-compose up -d --build account customer 
 docker-compose up -d --build gateway
 ````
 
 Health check:
 ````
-docker inspect --format "{{json .Name}} {{json .State.Health.Status}}" microservices_eureka_1 microservices_config_1 microservices_account_1 microservices_customer_1 microservices_gateway_1 microservices_zipkin_1
+docker inspect --format "{{json .Name}} {{json .State.Health.Status}}" microservices_eureka_1 microservices_config_1 microservices_account_1 microservices_customer_1 microservices_gateway_1 zipkin
+
+docker inspect --format "{{json .Name}} {{json .State.Status}}" microservices_elasticsearch_1 microservices_kibana_1
 ````
 
 Run command inside docker:
 ````
-docker exec -i -t microservices_config_1 curl http://config:8888/health
+docker exec -i -t microservices_config_1 curl http://config:8888/actuator/health
 ````
+
+## 7. Logs:
+- Elasticsearch: http://localhost:5601
+- Kibana: http://localhost:5601
+- Zipkin: http://localhost:9411
 
 ## 7. Swagger
 Open swagger account json/html:
