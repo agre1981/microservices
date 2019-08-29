@@ -45,6 +45,7 @@ zuul:
 #    enabled: true
 
 logging:
+  file: logs/gateway-service.log
   level:
     ROOT: INFO
     org.springframework.web: DEBUG

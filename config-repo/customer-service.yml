@@ -20,3 +20,6 @@ application:
     name: Oleksandr Grechanov
     url: https://github.com/agre1981/microservices
     email: agre1981@gmail.com
+
+logging:
+  file: logs/customer-service.log
