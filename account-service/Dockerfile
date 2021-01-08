@@ -1,4 +1,4 @@
-FROM openjdk:11
+FROM openjdk:15
 MAINTAINER Oleksandr Grechanov <agre1981@gmail.com>
 
 ADD target/account-service.jar account-service.jar

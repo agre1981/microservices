@@ -1,4 +1,4 @@
-FROM openjdk:11
+FROM openjdk:15
 MAINTAINER Oleksandr Grechanov <agre1981@gmail.com>
 
 ADD target/customer-service.jar customer-service.jar

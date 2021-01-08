@@ -40,8 +40,7 @@ Start containers:
 docker-compose up -d
 docker-compose up -d --build elasticsearch kibana zipkin 
 docker-compose up -d --build eureka config 
-docker-compose up -d --build account customer 
-docker-compose up -d --build gateway
+docker-compose up -d --build account customer gateway 
 ````
 
 Health check:
