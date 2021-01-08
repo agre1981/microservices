@@ -46,9 +46,9 @@ docker-compose up -d --build gateway
 
 Health check:
 ````
-docker inspect --format "{{json .Name}} {{json .State.Health.Status}}" microservices_eureka_1 microservices_config_1 microservices_account_1 microservices_customer_1 microservices_gateway_1 zipkin
+docker inspect --format "{{json .Name}} {{json .State.Health.Status}}" microservices_eureka_1 microservices_config_1 microservices_account_1 microservices_customer_1 microservices_gateway_1 
 
-docker inspect --format "{{json .Name}} {{json .State.Status}}" microservices_elasticsearch_1 microservices_kibana_1
+docker inspect --format "{{json .Name}} {{json .State.Status}}" microservices_elasticsearch_1 microservices_kibana_1 microservices_zipkin_1
 ````
 
 Run command inside docker:
