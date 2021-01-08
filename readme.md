@@ -35,6 +35,11 @@ http://localhost:8765/api/account/accounts
 http://localhost:8765/api/customer/customers
 
 ## 6. Docker
+Stop containers:
+````
+docker-compose down
+````
+
 Start containers:
 ````
 docker-compose up -d
